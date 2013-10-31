@@ -11,6 +11,7 @@ static int is_subtree_balance(BTREE_NODE);
 
 BTREE btree_create(){
     BTREE tree = (BTREE) malloc(sizeof(btree));
+    tree->root=NULL;
     assert(tree!=NULL);
     
     return tree;
@@ -42,6 +43,7 @@ void btree_free(BTREE tree){
     if(tree->root!=NULL)
         free_node(tree->root);
     
+    tree->root=NULL;
     free(tree);
 }
 
