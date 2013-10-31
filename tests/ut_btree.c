@@ -165,7 +165,6 @@ void btree_balance_test(){
     balance = btree_is_balance(tree);
     CU_ASSERT(balance);
     
-    
     /*      1
      *     / 
           2
@@ -176,7 +175,6 @@ void btree_balance_test(){
     node2->left = node3;
     balance = btree_is_balance(tree);
     CU_ASSERT(!balance);
-    
     
     /*      1
      *     / \
@@ -223,7 +221,6 @@ void btree_balance_test(){
     balance=btree_is_balance(tree);
     CU_ASSERT(balance);
     
-    
     /*        1
              / \
      *      2   3
@@ -234,7 +231,6 @@ void btree_balance_test(){
     node3->right = node6;
     balance=btree_is_balance(tree);
     CU_ASSERT(balance);
-    
     
     /*        1
              / \
@@ -249,7 +245,6 @@ void btree_balance_test(){
     balance=btree_is_balance(tree);
     CU_ASSERT(balance);
 
-    
     /*        1
              / \
      *      2   3
@@ -265,12 +260,146 @@ void btree_balance_test(){
     balance=btree_is_balance(tree);
     CU_ASSERT(!balance);
     
-    
     btree_free(tree);
 }
 
 void testBtree_is_balance() {
     btree_balance_test();
+}
+
+void btree_balance_v1_test(){
+    BTREE tree = btree_create();
+    CU_ASSERT(tree!=NULL);
+    
+    /*root is null*/
+    int balance = btree_is_balance_v1(tree);
+    CU_ASSERT(!balance);
+    
+    /*root is 1*/
+    BTREE_NODE node1 = create_node(1);
+    tree->root = node1;
+    balance=btree_is_balance_v1(tree);
+    CU_ASSERT(balance);
+    
+    /*      1
+     *     /
+     *    2 
+     */
+    
+    BTREE_NODE node2 = create_node(2);
+    //node1->left = node2;
+    btree_add_left(node1,node2);
+    balance = btree_is_balance_v1(tree);
+    CU_ASSERT(balance);
+    
+    /*      1
+     *     / 
+          2
+     *   /
+     *  3
+     */
+    BTREE_NODE node3 = create_node(3);
+    //node2->left = node3;
+    btree_add_left(node2,node3);
+    balance = btree_is_balance_v1(tree);
+    CU_ASSERT(!balance);
+    
+    /*      1
+     *     / \
+          2   3
+     */
+    node2->left=NULL;
+    //node1->right = node3;
+    btree_add_right(node1,node3);
+    balance = btree_is_balance_v1(tree);
+    CU_ASSERT(balance);
+   
+    /*        1
+             / \
+     *      2   3
+     *     /
+     *    4
+     */
+    BTREE_NODE node4 = create_node(4);
+    //node2->left = node4;
+    btree_add_left(node2,node4);
+    balance=btree_is_balance_v1(tree);
+    CU_ASSERT(balance);
+     
+    /*        1
+             / \
+     *      2   3
+     *     /
+     *    4 
+     *     \
+     *      5 
+     */
+    BTREE_NODE node5 = create_node(5);
+    //node4->right = node5;
+    btree_add_right(node4,node5);
+    balance=btree_is_balance_v1(tree);
+    CU_ASSERT(!balance);
+     
+    /*        1
+             / \
+     *      2   3
+     *     / \
+     *    4   5
+     */
+    //BTREE_NODE node5 = create_node(5);
+    node4->right=NULL;
+    //node2->right = node5;
+    btree_add_right(node2,node5);
+    balance=btree_is_balance_v1(tree);
+    CU_ASSERT(balance);
+    
+    /*        1
+             / \
+     *      2   3
+     *     / \   \
+     *    4   5   6
+     */
+    BTREE_NODE node6 = create_node(6);
+    //node3->right = node6;
+    btree_add_right(node3,node6);
+    balance=btree_is_balance_v1(tree);
+    CU_ASSERT(balance);
+    
+    /*        1
+             / \
+     *      2   3
+     *     / \   \
+     *    4   5   6
+     *       /
+     *      7
+     */
+    BTREE_NODE node7 = create_node(7);
+    //node5->right = node7;
+    btree_add_right(node5,node7);
+    balance=btree_is_balance_v1(tree);
+    CU_ASSERT(balance);
+
+    /*        1
+             / \
+     *      2   3
+     *     / \   \
+     *    4   5   6
+     *       /
+     *      7
+     *     /
+     *    8    
+     */
+    BTREE_NODE node8 = create_node(8);
+    //node7->left = node8;
+    btree_add_left(node7,node8);
+    balance=btree_is_balance_v1(tree);
+    CU_ASSERT(!balance);
+    
+    btree_free(tree);
+}
+
+void testBtree_is_balance_v1(){
+    btree_balance_v1_test();
 }
 
 int main() {
@@ -289,7 +418,8 @@ int main() {
 
     /* Add the tests to the suite */
     if ((NULL == CU_add_test(pSuite, "testBtree_get_depth", testBtree_get_depth)) ||
-            (NULL == CU_add_test(pSuite, "testBtree_is_balance", testBtree_is_balance))) {
+            (NULL == CU_add_test(pSuite, "testBtree_is_balance", testBtree_is_balance))||
+            (NULL == CU_add_test(pSuite,"testBtree_is_balance_v1",testBtree_is_balance_v1))) {
         CU_cleanup_registry();
         return CU_get_error();
     }

@@ -99,3 +99,74 @@ static int is_subtree_balance(BTREE_NODE node){
     return value;
 }
 
+
+BTREE_NODE btree_get_first_leaf(BTREE_NODE node){
+    if(node==NULL) return NULL;
+    
+    BTREE_NODE leaf = node;
+    while(leaf!=NULL){
+        if(leaf->left!=NULL)
+            leaf = leaf->left;
+        else if(leaf->right!=NULL)
+            leaf = leaf->right;
+        else
+            break;
+    }
+    
+    return leaf;
+}
+
+static int caculate_node_balance(BTREE_NODE node){
+    BTREE_NODE leaf = btree_get_first_leaf(node);
+    
+    if(leaf == NULL) return 1;
+    
+    int depth=0,is_balance=1;
+    
+    BTREE_NODE parent = leaf, prev_parent=leaf;
+    
+    while(parent!=node->parent){
+        int r_depth=0;
+        
+        if(parent->left == prev_parent){
+            if(parent->right!=NULL){
+                r_depth=caculate_node_balance(parent->right);
+            }
+            
+            int value = r_depth-depth;
+            
+            if(value>1||value<-1){
+                is_balance=0;
+            }
+            depth = depth>r_depth?depth:r_depth;
+        }
+        
+        depth++;
+        prev_parent = parent;
+        parent = parent->parent;
+        
+        if(is_balance==0) return is_balance;
+    }
+    
+    return is_balance==0?0:depth;
+}
+
+int btree_is_balance_v1(BTREE tree){
+    if(tree==NULL || tree->root==NULL) return 0;
+    
+    return caculate_node_balance(tree->root);
+}
+
+void btree_add_left(BTREE_NODE node,BTREE_NODE left){
+    if(node==NULL || left==NULL) return;
+    
+    node->left = left;
+    left->parent = node;
+}
+void btree_add_right(BTREE_NODE node,BTREE_NODE right){
+    if(node==NULL || right == NULL) return;
+    
+    node->right = right;
+    right->parent = node;
+}
+

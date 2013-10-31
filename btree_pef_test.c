@@ -41,8 +41,29 @@ void btree_pef_balance_test(int number){
 
 }
 
+void btree_pef_balance_v1_test(int number){
+    BTREE tree = build_large_tree(number);
+    
+    clock_t start,end;
+    double elapsed;
+    
+    start = clock();
+    
+    int balance=btree_is_balance_v1(tree);
+    
+    end = clock();
+    
+    elapsed = (double)(end-start)/CLOCKS_PER_SEC;
+    
+    //printf("CLOCKS_PER_SEC is %f\n",(double)CLOCKS_PER_SEC);
+    
+    printf("the elapse is %f\n",elapsed);
+    assert(balance);
+    
+    btree_free(tree);
+}
 
-static BTREE build_large_tree(int count){
+ BTREE build_large_tree(int count){
    BTREE tree = btree_create();
    LINK_LIST list = lk_list_create();
    
@@ -69,13 +90,15 @@ static void build_level_nodes(LINK_LIST list,int count){
 static int build_left_right(BTREE_NODE node,int count){
     if(count>0){
         BTREE_NODE left = create_node(count);
-        node->left = left;
+        //node->left = left;
+        btree_add_left(node,left);
         count--;
     }
     
     if(count>0){
         BTREE_NODE right = create_node(count);
-        node->right = right;
+        //node->right = right;
+        btree_add_right(node,right);
         count--;
     } 
     

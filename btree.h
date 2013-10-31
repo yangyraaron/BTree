@@ -30,6 +30,11 @@ BTREE btree_create(void);
 int btree_get_depth(BTREE);
 int btree_is_balance(BTREE);
 void btree_free(BTREE);
+BTREE_NODE btre_get_first_leaf(BTREE_NODE node);
+int btree_get_depth_v1(BTREE);
+int btree_is_balance_v1(BTREE);
+void btree_add_left(BTREE_NODE ,BTREE_NODE );
+void btree_add_right(BTREE_NODE ,BTREE_NODE );
 
 #ifdef	__cplusplus
 }
