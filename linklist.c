@@ -8,6 +8,9 @@ static LINK_NODE create_node(void*);
 LINK_LIST lk_list_create(){
     LINK_LIST list = (LINK_LIST) malloc(sizeof(link_list));
     assert(list!=NULL);
+    
+    list->head=NULL;
+    list->tail=NULL;
     list->size=0;
     
     return list;
@@ -65,6 +68,7 @@ void lk_list_empty(LINK_LIST list){
 
 static LINK_NODE create_node(void* value){
     LINK_NODE node = (LINK_NODE) malloc(sizeof(link_node));
+    node->next = NULL;
     node->value = value;
     
     return node;
