@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
     int number = 32768*256;
     
     //btree_pef_balance_test(number);
-    btree_pef_balance_v1_test(number);
+    //btree_pef_balance_v1_test(number);
     
     return (EXIT_SUCCESS);
 }

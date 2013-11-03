@@ -21,8 +21,8 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-Linux-x86
-CND_DLIB_EXT=so
+CND_PLATFORM=Cygwin_4.x-Windows
+CND_DLIB_EXT=dll
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -38,7 +38,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/btree.o \
 	${OBJECTDIR}/btree_pef_test.o \
 	${OBJECTDIR}/linklist.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/stack.o
 
 # Test Directory
 TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
@@ -46,7 +47,8 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 # Test Files
 TESTFILES= \
 	${TESTDIR}/TestFiles/f1 \
-	${TESTDIR}/TestFiles/f2
+	${TESTDIR}/TestFiles/f2 \
+	${TESTDIR}/TestFiles/f3
 
 # C Compiler Flags
 CFLAGS=
@@ -66,9 +68,9 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${TESTDIR}/TestFiles/f3
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${TESTDIR}/TestFiles/f3.exe
 
-${TESTDIR}/TestFiles/f3: ${OBJECTFILES}
+${TESTDIR}/TestFiles/f3.exe: ${OBJECTFILES}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.c} -o ${TESTDIR}/TestFiles/f3 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
@@ -92,6 +94,11 @@ ${OBJECTDIR}/main.o: main.c
 	${RM} $@.d
 	$(COMPILE.c) -g -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.c
 
+${OBJECTDIR}/stack.o: stack.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -g -I. -MMD -MP -MF $@.d -o ${OBJECTDIR}/stack.o stack.c
+
 # Subprojects
 .build-subprojects:
 
@@ -105,6 +112,10 @@ ${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/ut_linklist.o ${OBJECTFILES:%.o=%_noma
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.c}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} -lcunit -lcunit -lcunit 
 
+${TESTDIR}/TestFiles/f3: ${TESTDIR}/tests/ut_stack.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.c}   -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS} -lcunit 
+
 
 ${TESTDIR}/tests/ut_btree.o: tests/ut_btree.c 
 	${MKDIR} -p ${TESTDIR}/tests
@@ -116,6 +127,12 @@ ${TESTDIR}/tests/ut_linklist.o: tests/ut_linklist.c
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} $@.d
 	$(COMPILE.c) -g -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/ut_linklist.o tests/ut_linklist.c
+
+
+${TESTDIR}/tests/ut_stack.o: tests/ut_stack.c 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} $@.d
+	$(COMPILE.c) -g -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/ut_stack.o tests/ut_stack.c
 
 
 ${OBJECTDIR}/btree_nomain.o: ${OBJECTDIR}/btree.o btree.c 
@@ -170,12 +187,26 @@ ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.c
 	    ${CP} ${OBJECTDIR}/main.o ${OBJECTDIR}/main_nomain.o;\
 	fi
 
+${OBJECTDIR}/stack_nomain.o: ${OBJECTDIR}/stack.o stack.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/stack.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.c) -g -I. -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/stack_nomain.o stack.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/stack.o ${OBJECTDIR}/stack_nomain.o;\
+	fi
+
 # Run Test Targets
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
 	    ${TESTDIR}/TestFiles/f1 || true; \
 	    ${TESTDIR}/TestFiles/f2 || true; \
+	    ${TESTDIR}/TestFiles/f3 || true; \
 	else  \
 	    ./${TEST} || true; \
 	fi
@@ -183,7 +214,7 @@ ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.c
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${TESTDIR}/TestFiles/f3
+	${RM} ${TESTDIR}/TestFiles/f3.exe
 
 # Subprojects
 .clean-subprojects:

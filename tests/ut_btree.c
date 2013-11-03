@@ -405,6 +405,53 @@ void testBtree_is_balance_v1(){
     btree_balance_v1_test();
 }
 
+void testBtree_get_first_same_parent(){
+    BTREE tree = btree_create();
+    
+    /*    1
+     *   /
+     *  2
+     */
+    BTREE_NODE root = create_node(1);
+    tree->root = root;
+    BTREE_NODE node2 = create_node(2);
+    btree_add_left(root,node2);
+    
+    BTREE_NODE parent = btree_get_first_same_parent(root,node2);
+    CU_ASSERT(parent==NULL);
+    
+    /*      1
+     *     / \
+     *    2   3
+     */
+    BTREE_NODE node3 = create_node(3);
+    btree_add_right(root,node3);
+    parent = btree_get_first_same_parent(node2,node3);
+    CU_ASSERT(parent == root);
+    
+    /*      1
+     *     / \
+     *    2   3
+     *   / \
+     *  4   5
+     *       \
+     *        6 
+     */
+    BTREE_NODE node4 = create_node(4);
+    BTREE_NODE node5 = create_node(5);
+    BTREE_NODE node6 = create_node(6);
+    btree_add_left(node2,node4);
+    btree_add_right(node2,node5);
+    btree_add_right(node5,node6);
+    parent = btree_get_first_same_parent(node4,node6);
+    CU_ASSERT(parent == node2);
+    parent = btree_get_first_same_parent(node6,node3);
+    CU_ASSERT(parent == root);
+    
+    btree_free(tree);
+    
+}
+
 int main() {
     CU_pSuite pSuite = NULL;
 
@@ -420,9 +467,11 @@ int main() {
     }
 
     /* Add the tests to the suite */
-    if ((NULL == CU_add_test(pSuite, "testBtree_get_depth", testBtree_get_depth)) ||
-            (NULL == CU_add_test(pSuite, "testBtree_is_balance", testBtree_is_balance))||
-            (NULL == CU_add_test(pSuite,"testBtree_is_balance_v1",testBtree_is_balance_v1))) {
+//    (NULL == CU_add_test(pSuite, "testBtree_get_depth", testBtree_get_depth)) ||
+//            (NULL == CU_add_test(pSuite, "testBtree_is_balance", testBtree_is_balance))||
+//            (NULL == CU_add_test(pSuite,"testBtree_is_balance_v1",testBtree_is_balance_v1))||
+    
+    if ((NULL == CU_add_test(pSuite,"testBtree_get_first_same_parent",testBtree_get_first_same_parent))) {
         CU_cleanup_registry();
         return CU_get_error();
     }

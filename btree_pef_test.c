@@ -17,7 +17,6 @@ static BTREE_NODE create_node(const int data){
     return node;
 }
 
-
 void btree_pef_balance_test(int number){
     BTREE tree = build_large_tree(number);
     
