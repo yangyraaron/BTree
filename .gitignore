@@ -2,3 +2,6 @@
 /*.stackdump
 /*.exe
 /dist
+/nbproject/*.mk
+/nbproject/*.bash
+/nbproject/private

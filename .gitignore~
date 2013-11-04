@@ -1,4 +1,6 @@
 /build
 /*.stackdump
 /*.exe
-/*.dist
+/dist
+/nbproject/*.mk
+/nbproject/private

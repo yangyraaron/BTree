@@ -38,7 +38,7 @@
         <itemPath>tests/ut_linklist.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f3"
-                     displayName="Stack Unit Tests"
+                     displayName="Stack Unit Test"
                      projectFiles="true"
                      kind="TEST">
         <itemPath>tests/ut_stack.c</itemPath>
@@ -70,9 +70,6 @@
             <pElem>.</pElem>
           </incDir>
         </ccTool>
-        <linkerTool>
-          <output>${TESTDIR}/TestFiles/f3</output>
-        </linkerTool>
       </compileType>
       <item path="btree.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -112,6 +109,7 @@
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f3</output>
           <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
             <linkerOptionItem>-lcunit</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
@@ -193,6 +191,7 @@
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f3</output>
           <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
             <linkerOptionItem>-lcunit</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
