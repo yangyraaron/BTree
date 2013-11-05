@@ -201,7 +201,11 @@ BTREE_NODE btree_get_first_same_parent(BTREE_NODE node1, BTREE_NODE node2) {
     if (node1 == NULL || node2 == NULL) return NULL;
     
     //if one of node is the root then has not same parent
-    if(node1->parent==NULL || node2->parent == NULL) return NULL;
+    //if(node1->parent==NULL || node2->parent == NULL) return NULL;
+    
+    if(node1->parent==node2) return node2;
+    
+    if(node2->parent == node1) return node1;
     
     LINK_LIST path1 = get_path(node1);
     LINK_LIST path2 = get_path(node2);
@@ -225,5 +229,32 @@ BTREE_NODE btree_get_first_same_parent(BTREE_NODE node1, BTREE_NODE node2) {
     lk_list_free(path2);
     
     return parent;
+}
+
+BTREE_NODE btree_get_first_same_parent_order(BTREE tree,BTREE_NODE node1,BTREE_NODE node2){
+    BTREE_NODE node = tree->root,left=NULL,right=NULL;
+    
+    if(node1->left==node2 || node1->right==node2) return node1;
+    if(node2->left == node1 || node2->right==node1) return node2;
+    
+    if((node1->data-node2->data)<0){
+        left = node1;
+        right = node2;
+    }else{
+        left = node2;
+        right = node1;
+    }
+    
+    while(node!=NULL){
+        if((node->data>left->data) && (node->data<right->data)){
+            return node;
+        }else if(node->data>right->data){
+            node = node->left;
+        }else{
+            node = node->right;
+        }
+    }
+    
+    return node;
 }
 

@@ -418,7 +418,7 @@ void testBtree_get_first_same_parent(){
     btree_add_left(root,node2);
     
     BTREE_NODE parent = btree_get_first_same_parent(root,node2);
-    CU_ASSERT(parent==NULL);
+    CU_ASSERT(parent==root);
     
     /*      1
      *     / \
@@ -452,6 +452,36 @@ void testBtree_get_first_same_parent(){
     
 }
 
+void testBtree_get_frist_same_parent_order(){
+    BTREE tree = btree_create();
+    CU_ASSERT(tree!=NULL);
+    
+    BTREE_NODE node1 = create_node(20);
+    BTREE_NODE node2 = create_node(10);
+    BTREE_NODE node3 = create_node(30);
+    BTREE_NODE node4 = create_node(5);
+    BTREE_NODE node5 = create_node(12);
+    BTREE_NODE node6 = create_node(25);
+    BTREE_NODE node7 = create_node(35);
+    BTREE_NODE node8 = create_node(3);
+    BTREE_NODE node9 = create_node(7);
+    
+    tree->root = node1;
+    node1->left = node2;
+    node1->right = node3;
+    node2->left = node4;
+    node2->right = node5;
+    node3->left = node6;
+    node3->right = node7;
+    node4->left = node8;
+    node4->right = node9;
+    
+    BTREE_NODE node = btree_get_first_same_parent_order(tree,node8,node5);
+    CU_ASSERT(node == node2);
+    
+    btree_free(tree);
+}
+
 int main() {
     CU_pSuite pSuite = NULL;
 
@@ -471,7 +501,8 @@ int main() {
 //            (NULL == CU_add_test(pSuite, "testBtree_is_balance", testBtree_is_balance))||
 //            (NULL == CU_add_test(pSuite,"testBtree_is_balance_v1",testBtree_is_balance_v1))||
     
-    if ((NULL == CU_add_test(pSuite,"testBtree_get_first_same_parent",testBtree_get_first_same_parent))) {
+    if ((NULL == CU_add_test(pSuite,"testBtree_get_first_same_parent",testBtree_get_first_same_parent))||
+            (NULL == CU_add_test(pSuite,"testBtree_get_frist_same_parent_order",testBtree_get_frist_same_parent_order))) {
         CU_cleanup_registry();
         return CU_get_error();
     }

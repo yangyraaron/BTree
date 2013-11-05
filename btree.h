@@ -36,6 +36,7 @@ int btree_is_balance_v1(BTREE);
 void btree_add_left(BTREE_NODE ,BTREE_NODE );
 void btree_add_right(BTREE_NODE ,BTREE_NODE );
 BTREE_NODE btree_get_first_same_parent(BTREE_NODE,BTREE_NODE);
+BTREE_NODE btree_get_first_same_parent_order(BTREE,BTREE_NODE,BTREE_NODE);
 
 #ifdef	__cplusplus
 }
