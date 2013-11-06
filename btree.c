@@ -233,10 +233,8 @@ BTREE_NODE btree_get_first_same_parent(BTREE_NODE node1, BTREE_NODE node2) {
 
 BTREE_NODE btree_get_first_same_parent_order(BTREE tree,BTREE_NODE node1,BTREE_NODE node2){
     BTREE_NODE node = tree->root,left=NULL,right=NULL;
-    
-    if(node1->left==node2 || node1->right==node2) return node1;
-    if(node2->left == node1 || node2->right==node1) return node2;
-    
+//    if(node1->left==node2 || node1->right==node2) return node1;
+//    if(node2->left == node1 || node2->right==node1) return node2;
     if((node1->data-node2->data)<0){
         left = node1;
         right = node2;
@@ -245,9 +243,13 @@ BTREE_NODE btree_get_first_same_parent_order(BTREE tree,BTREE_NODE node1,BTREE_N
         right = node1;
     }
     
-    while(node!=NULL){
+    while(NULL!=node){
         if((node->data>left->data) && (node->data<right->data)){
             return node;
+        }else if(node==left){
+            return left;
+        }else if(node==right){
+            return right;
         }else if(node->data>right->data){
             node = node->left;
         }else{

@@ -480,6 +480,56 @@ void testBtree_get_frist_same_parent_order(){
     CU_ASSERT(node == node2);
     
     btree_free(tree);
+    
+    /**     4
+     *     /
+     *    3
+     *   /
+     *  2
+     * /
+     * 1
+     */
+    tree = btree_create();
+    node1 = create_node(4);
+    node2 = create_node(3);
+    node3 = create_node(2);
+    node4 = create_node(1);
+    
+    tree->root = node1;
+    node1->left = node2;
+    node2->left = node3;
+    node3->left = node4;
+    
+    node = btree_get_first_same_parent_order(tree,node4,node2);
+    CU_ASSERT(node==node2);
+    
+    btree_free(tree);
+    
+    /**     1
+     *       \
+     *        2
+     *         \
+     *          3
+     *           \
+     *            4
+     */
+    tree = btree_create();
+    node1 = create_node(1);
+    node2 = create_node(2);
+    node3 = create_node(3);
+    node4 = create_node(4);
+    
+    tree->root = node1;
+    node1->right = node2;
+    node2->right = node3;
+    node3->right = node4;
+    
+    node = btree_get_first_same_parent_order(tree,node4,node2);
+    CU_ASSERT(node==node2);
+    
+    btree_free(tree);
+    
+    
 }
 
 int main() {
