@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>btree.h</itemPath>
       <itemPath>linklist.h</itemPath>
+      <itemPath>set.h</itemPath>
       <itemPath>stack.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -19,6 +20,7 @@
       <itemPath>btree_pef_test.c</itemPath>
       <itemPath>linklist.c</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>set.c</itemPath>
       <itemPath>stack.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -36,6 +38,12 @@
                      projectFiles="true"
                      kind="TEST">
         <itemPath>tests/ut_linklist.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f4"
+                     displayName="Set Unit Test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/ut_set.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f3"
                      displayName="Stack Unit Test"
@@ -70,6 +78,11 @@
             <pElem>.</pElem>
           </incDir>
         </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
       <item path="btree.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -114,11 +127,23 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f4">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f4</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <item path="linklist.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="linklist.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="set.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="set.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="stack.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -127,6 +152,8 @@
       <item path="tests/ut_btree.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/ut_linklist.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/ut_set.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/ut_stack.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -196,11 +223,23 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f4">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f4</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <item path="linklist.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="linklist.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="set.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="set.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="stack.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -209,6 +248,8 @@
       <item path="tests/ut_btree.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/ut_linklist.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/ut_set.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/ut_stack.c" ex="false" tool="0" flavor2="0">
       </item>
