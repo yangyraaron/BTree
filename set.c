@@ -42,7 +42,7 @@ set_p set_create(int size){
     assert(NULL!=set);
     
     set->size = prime;
-    set->heads = (set_entity_p*)malloc(sizeof(set_entity_p)*set->size);
+    set->heads = (set_entity_p*)calloc(sizeof(set_entity_p),set->size);
     
     return set;
 }
