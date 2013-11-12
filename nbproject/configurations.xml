@@ -4,6 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>avltree.h</itemPath>
+      <itemPath>bitmap.h</itemPath>
       <itemPath>btree.h</itemPath>
       <itemPath>linklist.h</itemPath>
       <itemPath>set.h</itemPath>
@@ -16,6 +18,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>avltree.c</itemPath>
+      <itemPath>bitmap.c</itemPath>
       <itemPath>btree.c</itemPath>
       <itemPath>btree_pef_test.c</itemPath>
       <itemPath>linklist.c</itemPath>
@@ -27,6 +31,12 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f5"
+                     displayName="Bitmap Unit Test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/ut_bitmap.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1"
                      displayName="BTree Unit Tests"
                      projectFiles="true"
@@ -84,6 +94,14 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="avltree.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="avltree.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="bitmap.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="bitmap.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="btree.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="btree.h" ex="false" tool="3" flavor2="0">
@@ -135,6 +153,15 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f5">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f5</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <item path="linklist.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="linklist.h" ex="false" tool="3" flavor2="0">
@@ -148,6 +175,8 @@
       <item path="stack.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="stack.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/ut_bitmap.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/ut_btree.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -178,6 +207,14 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="avltree.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="avltree.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="bitmap.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="bitmap.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="btree.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="btree.h" ex="false" tool="3" flavor2="0">
@@ -231,6 +268,15 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f5">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f5</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
       <item path="linklist.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="linklist.h" ex="false" tool="3" flavor2="0">
@@ -244,6 +290,8 @@
       <item path="stack.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="stack.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/ut_bitmap.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/ut_btree.c" ex="false" tool="0" flavor2="0">
       </item>

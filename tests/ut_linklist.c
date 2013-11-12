@@ -55,17 +55,17 @@ void testLk_list_pop() {
     lk_list_append(list,&arr[2]);
     
     int value1 =GET_INT(lk_list_pop(list));
-    CU_ASSERT(value1=arr[0]);
+    CU_ASSERT(value1==arr[0]);
     CU_ASSERT(list->size==2);
     CU_ASSERT(list->tail->next==list->head);
     
     int value2 =GET_INT(lk_list_pop(list));
-    CU_ASSERT(value2=arr[1]);
+    CU_ASSERT(value2==arr[1]);
     CU_ASSERT(list->size==1);
     CU_ASSERT(list->tail==list->head);
     
     int value3 =GET_INT(lk_list_pop(list));
-    CU_ASSERT(value3=arr[2]);
+    CU_ASSERT(value3==arr[2]);
     CU_ASSERT(list->size==0);
     CU_ASSERT(list->head==NULL);
     CU_ASSERT(list->tail==NULL);
