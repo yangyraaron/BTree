@@ -29,6 +29,8 @@ void testSkip_test() {
     skip_add(skiplist,5);
     skip_add(skiplist,100);
     
+    //skip_print(skiplist);
+    
     int value = skip_test(skiplist,2);
     CU_ASSERT(value==1);
     value = skip_test(skiplist,5);

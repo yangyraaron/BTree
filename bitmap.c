@@ -25,7 +25,7 @@ void bp_set(int* bp, int value) {
     int pos = value % BITMAP_LEN;
     bp[index] = bit | (BIT << pos);
 
-    printf("\n after set value is %d \n",  bp[index]);
+    //printf("\n after set value is %d \n",  bp[index]);
 }
 
 int bp_test(int* bp, int value) {
@@ -44,5 +44,5 @@ void bp_clear(int* bp, int value) {
 
     bp[index] = bit & (~(BIT << pos));
 
-    printf("\n after clear value is %d \n", bp[index]);
+    //printf("\n after clear value is %d \n", bp[index]);
 }

@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <math.h>
+#include <stdio.h>
 
 #include "skiplist.h"
 
 #define MAX_LEVEL 15
 
 static skip_node_p create_node(int level, int key) {
-    skip_node_p node = (skip_node_p) malloc(sizeof (skip_node) + level * sizeof (skip_node_p));
+    skip_node_p node = (skip_node_p) malloc(sizeof (skip_node) + (level+1) * sizeof (skip_node_p));
     assert(NULL != node);
 
     node->key = key;
@@ -48,6 +49,9 @@ void skip_free(skiplist_p skiplist) {
 
         free(tmp);
     }
+    
+    free(skiplist->header);
+    free(skiplist);
 }
 
 void skip_add(skiplist_p skiplist, int value) {
@@ -95,7 +99,7 @@ void skip_del(skiplist_p skiplist, int value) {
 
         updates[i] = node;
     }
-    
+
     /*because the last node value is in the bottom level list
      * so if the node is null or key is not equal to value then 
      * there is no value in the list
@@ -130,4 +134,23 @@ int skip_test(skiplist_p skiplist, int value) {
     if (node->key == value) return 1;
 
     return 0;
+}
+
+void skip_print(skiplist_p skiplist) {
+    skip_node_p node = NULL;
+    int i;
+
+    printf("\n");
+
+    for (i = skiplist->level; i >= 0; --i) {
+        node = skiplist->header->forwards[i];
+
+        printf("Level:%d ", i);
+        while (NULL != node) {
+            printf("%d-->", node->key);
+            node = node->forwards[i];
+        }
+        printf("NULL \n");
+
+    }
 }

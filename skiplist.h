@@ -30,6 +30,7 @@ extern "C" {
     void skip_add(skiplist_p,int);
     int skip_test(skiplist_p,int);
     void skip_del(skiplist_p,int);
+    void skip_print(skiplist_p);
 
 #ifdef	__cplusplus
 }

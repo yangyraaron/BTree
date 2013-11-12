@@ -7,12 +7,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "btree.h"
+//#include "btree.h"
+#include "skiplist.h"
 /*
  * 
  */
 
-extern void btree_pef_balance_test(int);
+//extern void btree_pef_balance_test(int);
 
 
 int main(int argc, char** argv) {
@@ -28,6 +29,17 @@ int main(int argc, char** argv) {
 //    
 //    
 //    printf("time : %d time1 : %d",time,time1);
+    
+    skiplist_p list = skip_create();
+    
+    int i;
+    for(i=1;i<=30;++i){
+        skip_add(list,i);
+    }
+    
+    skip_print(list);
+    
+    skip_free(list);
     
     return (EXIT_SUCCESS);
 }

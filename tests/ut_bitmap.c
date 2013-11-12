@@ -65,8 +65,7 @@ int main() {
     }
 
     /* Add the tests to the suite */
-    if ((NULL == CU_add_test(pSuite, "testBp_test", testBp_test)) ||
-            (NULL == CU_add_test(pSuite, "testBp_set", testBp_set))) {
+    if ((NULL == CU_add_test(pSuite, "testBp_test", testBp_test))) {
         CU_cleanup_registry();
         return CU_get_error();
     }
