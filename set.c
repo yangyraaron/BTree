@@ -35,7 +35,6 @@ static int next_prime(int num){
     return num;
 }
 
-
 set_p set_create(int size){
     int prime = next_prime(size);
     set_p set = (set_p) malloc(sizeof(set));
@@ -76,7 +75,6 @@ static void free_entity(set_entity_p entity){
     entity->next = NULL;
     free(entity);
 }
-
 
 static set_entity_p create_entity(int key){
     set_entity_p entity = (set_entity_p) malloc(sizeof(set_entity));
