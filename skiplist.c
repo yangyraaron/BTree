@@ -58,9 +58,8 @@ void skip_add(skiplist_p skiplist, int value) {
     int i;
     //the array contains the nodes in every level needs to be updated
     skip_node_p updates[MAX_LEVEL];
-    //calculate the last node less than value in every level
+    skip_node_p node = skiplist->header;
     for (i = skiplist->level; i >= 0; --i) {
-        skip_node_p node = skiplist->header;
         while ((NULL != node->forwards[i]) && (node->forwards[i]->key < value)) {
             node = node->forwards[i];
         }
