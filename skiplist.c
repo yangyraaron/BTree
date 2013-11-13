@@ -137,19 +137,20 @@ int skip_test(skiplist_p skiplist, int value) {
 
 void skip_print(skiplist_p skiplist) {
     skip_node_p node = NULL;
-    int i;
+    int i,j;
 
     printf("\n");
 
-    for (i = skiplist->level; i >= 0; --i) {
+    for (i = skiplist->level,j=0; i >= 0; --i) {
         node = skiplist->header->forwards[i];
 
         printf("Level:%d ", i);
         while (NULL != node) {
             printf("%d-->", node->key);
             node = node->forwards[i];
+            ++j;
         }
-        printf("NULL \n");
+        printf("NULL | total:%d\n",j);
 
     }
 }
