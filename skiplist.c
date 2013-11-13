@@ -141,7 +141,8 @@ void skip_print(skiplist_p skiplist) {
 
     printf("\n");
 
-    for (i = skiplist->level,j=0; i >= 0; --i) {
+    for (i = skiplist->level; i >= 0; --i) {
+        j=0;
         node = skiplist->header->forwards[i];
 
         printf("Level:%d ", i);

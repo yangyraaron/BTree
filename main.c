@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     skiplist_p list = skip_create();
     
     int i;
-    for(i=50;i>0;--i){
+    for(i=100;i>0;--i){
         skip_add(list,i);
     }
     
