@@ -41,6 +41,14 @@ int main(int argc, char** argv) {
     
     skip_free(list);
     
+    list = skip_create();
+    for(i=1;i<101;++i){
+        skip_add(list,i);
+    }
+    skip_print(list);
+    
+    skip_free(list);
+    
     return (EXIT_SUCCESS);
 }
 
