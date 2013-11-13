@@ -9,7 +9,7 @@
 #define MAX_LEVEL 15
 
 static skip_node_p create_node(int level, int key) {
-    skip_node_p node = (skip_node_p) malloc(sizeof (skip_node) + (level + 1) * sizeof (skip_node_p));
+    skip_node_p node = (skip_node_p) malloc(sizeof (skip_node) + (level+1) * sizeof (skip_node_p));
     assert(NULL != node);
 
     node->key = key;
@@ -49,46 +49,45 @@ void skip_free(skiplist_p skiplist) {
 
         free(tmp);
     }
-
+    
     free(skiplist->header);
     free(skiplist);
 }
 
 void skip_add(skiplist_p skiplist, int value) {
+    int i;
+    //the array contains the nodes in every level needs to be updated
+    skip_node_p updates[MAX_LEVEL];
     skip_node_p node = skiplist->header;
-    int i, level = random_level();
-    skip_node_p cur_node = create_node(level, value);
-    skip_node_p* updates = (skip_node_p*)malloc((level+1) * sizeof (skip_node_p));
-
-    for (i = level; i >= 0; --i) {
-        if(i>skiplist->level){
-            updates[i] = skiplist->header;
-            continue;
-        }
-        
+    for (i = skiplist->level; i >= 0; --i) {
         while ((NULL != node->forwards[i]) && (node->forwards[i]->key < value)) {
             node = node->forwards[i];
         }
 
         updates[i] = node;
     }
-    
-    if(level>skiplist->level)
-        skiplist->level = level;
 
+    int level = random_level();
+    skip_node_p cur_node = create_node(level, value);
+    //create the list that isn't created
+    if (level > skiplist->level) {
+        for (i = level; i > skiplist->level; --i) {
+            updates[i] = skiplist->header;
+        }
+
+        skiplist->level = level;
+    }
     //update the nodes and insert current node
     for (i = 0; i <= level; ++i) {
         cur_node->forwards[i] = updates[i]->forwards[i];
         updates[i]->forwards[i] = cur_node;
     }
-    
-    free(updates);
 
 }
 
 void skip_del(skiplist_p skiplist, int value) {
     int i;
-    skip_node_p updates[skiplist->level+1];
+    skip_node_p updates[MAX_LEVEL];
     skip_node_p node = skiplist->header;
     skip_node_p last = NULL;
 
@@ -138,12 +137,12 @@ int skip_test(skiplist_p skiplist, int value) {
 
 void skip_print(skiplist_p skiplist) {
     skip_node_p node = NULL;
-    int i, j;
+    int i,j;
 
     printf("\n");
 
     for (i = skiplist->level; i >= 0; --i) {
-        j = 0;
+        j=0;
         node = skiplist->header->forwards[i];
 
         printf("Level:%d ", i);
@@ -152,7 +151,7 @@ void skip_print(skiplist_p skiplist) {
             node = node->forwards[i];
             ++j;
         }
-        printf("NULL | total:%d\n", j);
+        printf("NULL | total:%d\n",j);
 
     }
 }
