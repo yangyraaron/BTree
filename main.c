@@ -14,9 +14,10 @@
  */
 
 //extern void btree_pef_balance_test(int);
-
+extern void huf_compress(void);
 
 int main(int argc, char** argv) {
+    huf_compress();
     //int number = 32768*256;
     
     //printf("int size %ld",sizeof(int));
@@ -30,24 +31,28 @@ int main(int argc, char** argv) {
 //    
 //    printf("time : %d time1 : %d",time,time1);
     
-    skiplist_p list = skip_create();
+//    skiplist_p list = skip_create();
+//    
+//    int i;
+//    for(i=100;i>0;--i){
+//        skip_add(list,i);
+//    }
+//    
+//    skip_print(list);
+//    
+//    skip_free(list);
+//    
+//    list = skip_create();
+//    for(i=1;i<101;++i){
+//        skip_add(list,i);
+//    }
+//    skip_print(list);
+//    
+//    skip_free(list);
     
-    int i;
-    for(i=100;i>0;--i){
-        skip_add(list,i);
-    }
+//    printf("int %ld\n",sizeof(unsigned int));
+//    printf("long %ld\n",sizeof(unsigned long));
     
-    skip_print(list);
-    
-    skip_free(list);
-    
-    list = skip_create();
-    for(i=1;i<101;++i){
-        skip_add(list,i);
-    }
-    skip_print(list);
-    
-    skip_free(list);
     
     return (EXIT_SUCCESS);
 }

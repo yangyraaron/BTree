@@ -7,6 +7,9 @@
       <itemPath>avltree.h</itemPath>
       <itemPath>bitmap.h</itemPath>
       <itemPath>btree.h</itemPath>
+      <itemPath>dic.h</itemPath>
+      <itemPath>heap.h</itemPath>
+      <itemPath>huffman.h</itemPath>
       <itemPath>linklist.h</itemPath>
       <itemPath>set.h</itemPath>
       <itemPath>skiplist.h</itemPath>
@@ -23,6 +26,10 @@
       <itemPath>bitmap.c</itemPath>
       <itemPath>btree.c</itemPath>
       <itemPath>btree_pef_test.c</itemPath>
+      <itemPath>dic.c</itemPath>
+      <itemPath>heap.c</itemPath>
+      <itemPath>huffman.c</itemPath>
+      <itemPath>huftest.c</itemPath>
       <itemPath>linklist.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>set.c</itemPath>
@@ -44,6 +51,24 @@
                      projectFiles="true"
                      kind="TEST">
         <itemPath>tests/ut_btree.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f9"
+                     displayName="Dic Unit Test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/ut_dic.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f7"
+                     displayName="Heap Unit Test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/ut_heap.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f8"
+                     displayName="Huffman Unit Test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/ut_huffman.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2"
                      displayName="LinkList Unit Tests"
@@ -116,6 +141,10 @@
       </item>
       <item path="btree_pef_test.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="dic.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="dic.h" ex="false" tool="3" flavor2="0">
+      </item>
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
@@ -178,6 +207,40 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f7">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f7</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f8">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f8</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f9">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f9</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <item path="heap.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="heap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="huffman.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="huffman.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="huftest.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="linklist.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="linklist.h" ex="false" tool="3" flavor2="0">
@@ -199,6 +262,12 @@
       <item path="tests/ut_bitmap.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/ut_btree.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/ut_dic.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/ut_heap.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/ut_huffman.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/ut_linklist.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -243,6 +312,10 @@
       </item>
       <item path="btree_pef_test.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="dic.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="dic.h" ex="false" tool="3" flavor2="0">
+      </item>
       <folder path="TestFiles/f1">
         <cTool>
           <incDir>
@@ -307,6 +380,40 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f7">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f7</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f8">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f8</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f9">
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f9</output>
+          <linkerLibItems>
+            <linkerOptionItem>-lcunit</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <item path="heap.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="heap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="huffman.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="huffman.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="huftest.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="linklist.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="linklist.h" ex="false" tool="3" flavor2="0">
@@ -328,6 +435,12 @@
       <item path="tests/ut_bitmap.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/ut_btree.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/ut_dic.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/ut_heap.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/ut_huffman.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/ut_linklist.c" ex="false" tool="0" flavor2="0">
       </item>

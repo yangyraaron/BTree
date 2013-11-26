@@ -108,7 +108,7 @@ int set_get(set_p set,int key){
     
      set_entity_p node = head;
         
-     while(NULL!=node->next){
+     while(NULL!=node){
          if(node->key == key)
              return key;
         node = node->next;
