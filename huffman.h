@@ -16,7 +16,7 @@ extern "C" {
     
     typedef struct huf_node_s {
         unsigned int weight;
-        char* value;
+        void* value;
         char* encoding;
         huf_node_p parent;
         huf_node_p left;
@@ -38,7 +38,7 @@ extern "C" {
         unsigned int len;
     }encoding_map,*encoding_map_p;
 
-    void huf_add_key(unsigned int, char*);
+    void huf_add_key(unsigned int, void*);
     huf_p huf_create(void);
     encoding_map_p huf_create_maps(huf_p);
     void huf_free(huf_p);

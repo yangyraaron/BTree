@@ -8,7 +8,7 @@
 
 static heap_p key_heap;
 
-static huf_node_p create_node(unsigned int weight, char* value) {
+static huf_node_p create_node(unsigned int weight, void* value) {
     huf_node_p node = (huf_node_p) malloc(sizeof (huf_node));
     node->weight = weight;
     node->value = value;
@@ -28,7 +28,7 @@ static huf_node_p get_next_node() {
     return (huf_node_p) pq_pop(key_heap);
 }
 
-void huf_add_key(unsigned int weight, char* value) {
+void huf_add_key(unsigned int weight, void* value) {
     if (NULL == key_heap)
         key_heap = pq_create(MAX_ELEMENTS);
 
