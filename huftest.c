@@ -16,6 +16,14 @@ typedef struct key_counter_s {
     key_counter_p next;
 } key_counter;
 
+typedef struct word_counter_s* word_counter_p;
+
+typedef struct word_counter_s {
+    char* word;
+    int counter;
+    word_counter_p next;
+} word_counter;
+
 static key_counter_p create_counter(int key, int counter) {
     key_counter_p kc = (key_counter_p) malloc(sizeof (key_counter));
     kc->key = key;
@@ -65,6 +73,8 @@ static void readFile(char* path) {
     fclose(file);
 }
 
+
+
 static void compress_encoding(char* path) {
     readFile(path);
 
@@ -79,13 +89,14 @@ static void compress_encoding(char* path) {
     en_map = huf_create_maps(huff);
 }
 
+
 static char* get_encoding(int key) {
     int i;
     i = en_map->len - 1;
 
     while (i >= 0) {
         huf_node_p encoding = en_map->maps[i];
-        key_counter_p node = (key_counter_p)encoding->value;
+        key_counter_p node = (key_counter_p) encoding->value;
         if (node->key == key) {
             return encoding->encoding;
         }
@@ -94,6 +105,7 @@ static char* get_encoding(int key) {
 
     return NULL;
 }
+
 
 static char* generate_file(char* file, const char* ex) {
     char* last = file + strlen(file) - 1;
@@ -182,7 +194,7 @@ void huf_uncompress() {
             index--;
 
             if (NULL != node->value) {
-                int value = ((key_counter_p)node->value)->key;
+                int value = ((key_counter_p) node->value)->key;
                 fputc(value, file);
 
                 printf("str : %c\n", value);

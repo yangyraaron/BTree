@@ -16,11 +16,13 @@
 //extern void btree_pef_balance_test(int);
 extern void huf_compress(void);
 extern void huf_uncompress(void);
+extern void huf_word_compress(void);
+extern void huf_word_uncompress(void);
 
 int main(int argc, char** argv) {
-    printf("compressing...");
-    huf_compress();
-    printf("uncompress...");
+    printf("compressing...\n");
+    huf_compress();;
+    printf("uncompress...\n");
     huf_uncompress();
     //int number = 32768*256;
     
