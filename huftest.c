@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include "huffman.h"
 
@@ -73,8 +74,6 @@ static void readFile(char* path) {
     fclose(file);
 }
 
-
-
 static void compress_encoding(char* path) {
     readFile(path);
 
@@ -84,11 +83,13 @@ static void compress_encoding(char* path) {
 
         node = node->next;
     }
+    node = create_counter(0,0);
+    
+    huf_add_key(0,node);
 
     huff = huf_create();
     en_map = huf_create_maps(huff);
 }
-
 
 static char* get_encoding(int key) {
     int i;
@@ -105,7 +106,6 @@ static char* get_encoding(int key) {
 
     return NULL;
 }
-
 
 static char* generate_file(char* file, const char* ex) {
     char* last = file + strlen(file) - 1;
@@ -131,15 +131,21 @@ void huf_compress() {
     //char* content=(char*)malloc(sizeof(char));
     unsigned int tmp = 0xFF;
     char* encoding;
-    int index = 7;
+    int index = 4;
 
     do {
         c = fgetc(orig_file);
         encoding = get_encoding(c);
 
-        printf("char : %c encoding : %s\n", c, encoding);
+        //printf("char : %c encoding : %s\n", c, encoding);
+        //for testing if the encoding is correct
         if (NULL == encoding) {
+            printf("there is a null encoding %c\n",c);
             continue;
+        }
+        
+        if (c == 92) {
+            printf("backslash encoding : %s\n", encoding);
         }
 
         int i;
@@ -147,14 +153,13 @@ void huf_compress() {
         int len = strlen(encoding);
         while (i < len) {
             char bit = encoding[i];
-            //int value = bit == '0' ? 0x00 : 0x01;
             if (bit == '0')
                 tmp = tmp & (~(0x01 << index));
 
             ++i;
-            //++encoding;
             --index;
-
+            
+            //the 8 bits are finished,reset the values
             if (index < 0) {
                 fputc(tmp, des_file);
                 tmp = 0xFF;
@@ -163,9 +168,16 @@ void huf_compress() {
         }
 
     } while (EOF != c);
-    if (index != 0)
-        fputc(tmp, des_file);
-
+    if (index != 0){
+       fputc(tmp, des_file);
+//       rewind(des_file);
+//       
+//       //set the last no value bits count;
+//       c = fgetc(des_file);
+//       c = ((index<<5 & 0xFF))&c;
+//       rewind(des_file);
+//       fputc(c,des_file);
+    }
     fclose(orig_file);
 
     fclose(des_file);
@@ -179,12 +191,17 @@ void huf_uncompress() {
     FILE* file = fopen(file_name, "w");
 
     int c;
-    int tmp;
-    int index;
+    unsigned int tmp;
+    int index=4;
+    int size=0;
+    
     huf_node_p node = huff->root;
     do {
-        index = 7;
         c = fgetc(orig_file);
+        if(index==4){
+            size = (c>>5) & 0x07;
+        }
+        
         while (index >= 0) {
             tmp = (c >> index)& (0x01);
             if (tmp == 0) {
@@ -195,14 +212,14 @@ void huf_uncompress() {
 
             if (NULL != node->value) {
                 int value = ((key_counter_p) node->value)->key;
+                if(value==92)
+                    printf("there is a backslash\n");
                 fputc(value, file);
-
-                printf("str : %c\n", value);
 
                 node = huff->root;
             }
         }
-
+        index = 7;
 
     } while (EOF != c);
 

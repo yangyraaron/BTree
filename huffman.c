@@ -68,7 +68,10 @@ huf_p huf_create() {
         }
 
         huf_node_p parent = create_node(min1->weight + min2->weight, NULL);
-        if (min1->weight < min2->weight) {
+        if (min1->weight <= min2->weight) {
+            //this code is very important because if the weight is same you may not find correct value
+            if(min1->weight == min2->weight)
+                --min1->weight;
             parent->left = min1;
             parent->right = min2;
         } else {
@@ -129,7 +132,7 @@ static char* caculate_path(huf_node_p node) {
 encoding_map_p huf_create_maps(huf_p huf) {
 
     encoding_map_p encoding = (encoding_map_p) malloc(sizeof (encoding_map));
-    encoding->maps = (encoding_map_p*) malloc(huf->size * sizeof (encoding_map_p));
+    encoding->maps = (huf_node_p*) malloc(huf->size * sizeof (huf_node_p));
     encoding->len = huf->size;
 
     huf_node_p node = huf->leaf_head;
