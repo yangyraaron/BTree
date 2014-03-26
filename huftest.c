@@ -7,7 +7,7 @@
 
 #include "huffman.h"
 
-#define TEST_FILE "/home/wisedulab2/NetBeansProjects/configuration.txt"
+#define TEST_FILE "E:/projects/GitHub/BTree/huftest.xml"
 
 typedef struct key_counter_s* key_counter_p;
 
@@ -184,7 +184,7 @@ void huf_compress() {
 }
 
 void huf_uncompress() {
-    char* file_name = generate_file(TEST_FILE, "_1.txt");
+    char* file_name = generate_file(TEST_FILE, "_1.xml");
     char* orig_file_name = generate_file(TEST_FILE, ".huff");
 
     FILE* orig_file = fopen(orig_file_name, "r");

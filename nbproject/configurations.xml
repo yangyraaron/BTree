@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="90">
+<configurationDescriptor version="94">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -8,6 +8,7 @@
       <itemPath>bitmap.h</itemPath>
       <itemPath>btree.h</itemPath>
       <itemPath>dic.h</itemPath>
+      <itemPath>gc.h</itemPath>
       <itemPath>heap.h</itemPath>
       <itemPath>huffman.h</itemPath>
       <itemPath>linklist.h</itemPath>
@@ -27,6 +28,7 @@
       <itemPath>btree.c</itemPath>
       <itemPath>btree_pef_test.c</itemPath>
       <itemPath>dic.c</itemPath>
+      <itemPath>gc.c</itemPath>
       <itemPath>heap.c</itemPath>
       <itemPath>huffman.c</itemPath>
       <itemPath>huftest.c</itemPath>
@@ -231,6 +233,10 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <item path="gc.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gc.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="heap.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="heap.h" ex="false" tool="3" flavor2="0">
@@ -404,6 +410,10 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <item path="gc.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gc.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="heap.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="heap.h" ex="false" tool="3" flavor2="0">
